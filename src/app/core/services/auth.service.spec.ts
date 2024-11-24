@@ -32,6 +32,19 @@ describe('AuthService', () => {
       expect(service.getErrorMessage()()).toBe('Credenciales incorrectas');
       expect(localStorage.getItem('token')).toBeNull();
     });
+
+    it('should handle errors gracefully and set an error message', () => {
+      // Simulamos un error interno en la búsqueda de usuarios
+      spyOn(service['mockUsers'], 'find').and.throwError('Simulated Error');
+
+      const result = service.login('admin@example.com', 'admin123');
+
+      // Asegúrate de que los valores devueltos y los estados reflejen el manejo del error
+      expect(result()).toBeFalse();
+      expect(service.getLoginStatus()()).toBeFalse();
+      expect(service.getErrorMessage()()).toBe('Ocurrió un error durante la autenticación');
+      expect(localStorage.getItem('token')).toBeNull();
+    });
   });
 
   describe('logout', () => {
