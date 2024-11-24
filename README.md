@@ -1,7 +1,7 @@
 # Market Insights Dashboard
 
 ## 🌟 **Descripción**
-**Market Insights Dashboard** es una aplicación desarrollada en Angular 19 que combina la potencia de **GraphQL**, algoritmos **metaheurísticos** y visualizaciones avanzadas para ofrecer análisis en tiempo real de datos financieros. Este proyecto busca mostrar el potencial de Angular en la gestión de altos volúmenes de datos, su capacidad de reactividad y modularidad, y cómo utilizar cálculos avanzados en segundo plano mediante **web workers**.
+**Market Insights Dashboard** es una aplicación desarrollada en Angular 19 que combina la potencia del framework, algoritmos **metaheurísticos** y visualizaciones avanzadas para ofrecer análisis en tiempo real de datos financieros. Este proyecto busca mostrar el potencial de Angular en la gestión de altos volúmenes de datos, su capacidad de reactividad y modularidad, y cómo utilizar cálculos avanzados en segundo plano mediante **web workers**.
 
 ## 🚀 **Características**
 - **Dashboard interactivo:**
@@ -12,13 +12,13 @@
 - **Gráficos avanzados:**
   - Heatmaps, líneas de tendencia, y gráficos de velas japonesas utilizando librerías como `ngx-charts` o `D3.js`.
 - **Actualizaciones en tiempo real:**
-  - GraphQL Subscriptions para datos en vivo.
+  - Subscriptions para datos en vivo.
 - **Web Workers:**
   - Ejecución de cálculos complejos en segundo plano para un rendimiento óptimo.
 
 ## 🛠️ **Tecnologías Utilizadas**
 - **Angular 19**: Framework principal.
-- **GraphQL**: Consumo de datos desde APIs de terceros (CoinGecko, Alpha Vantage, etc.).
+- **API Rest**: Consumo de datos desde APIs de terceros (Finnhub, Alpha Vantage, etc.).
 - **Web Workers**: Para cálculos pesados como optimización de portafolios y predicción de tendencias.
 - **Signals**: Para la reactividad eficiente de los componentes.
 - **Visualización**: `ngx-charts` o `D3.js` para gráficos interactivos.
@@ -40,11 +40,9 @@
 │   │   ├── app.config.ts        # Configuración inicial de la app
 │   │   ├── app.routes.ts        # Configuración de rutas principales
 │   │   ├── core/                # Módulo Core (GraphQL y servicios globales)
-│   │   │   ├── graphql/         # Configuración de GraphQL
-│   │   │   │   └── queries.ts   # Consultas
-│   │   │   │   └── mutations.ts # Mutaciones
 │   │   │   ├── interceptors/    # Interceptores HTTP
 │   │   │   └── services/        # Servicios globales
+│   │   │   └── guards  /        # Guard globales
 │   │   ├── shared/              # Componentes y utilidades reutilizables
 │   │   │   ├── components/      # Componentes comunes (ej. Navbar)
 │   │   │   ├── pipes/           # Pipes compartidos
@@ -87,8 +85,6 @@ npm install
 ```typescript
 export const environment = {
   production: false,
-  graphqlApiUrl: 'https://api.example.com/graphql',
-  apiKey: 'TU_API_KEY'
 };
 ```
 
@@ -105,7 +101,7 @@ Este proyecto es open source. Si deseas contribuir:
  - Haz un pull request con tus cambios.
 
 ## 📈 Roadmap
-1. Setup inicial y conexión con una API GraphQL.
+1. Setup inicial y conexión con una API Rest.
 2. Visualización básica de datos históricos.
 3. Implementación de Web Workers para algoritmos metaheurísticos.
 4. Configuración de widgets y visualizaciones personalizables.
