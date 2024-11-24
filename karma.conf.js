@@ -24,13 +24,15 @@ module.exports = function (config) {
       suppressAll: true
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/market-insights'),
+      dir: require('path').join(__dirname, './coverage'),
       subdir: '.',
       reporters: [
         { type: 'html' },
+        {type: 'lcov'},
         { type: 'text-summary' }
       ]
     },
+    includeAllSources: true,
     reporters: ['progress', 'kjhtml', 'coverage'],
     browsers: ['Chrome', 'ChromeHeadless'],
     restartOnFileChange: true
