@@ -12,4 +12,8 @@ export class FinanceService {
   getHistoricalData(symbol: string, startDate: string, endDate: string) {
     return this.financeService.getHistoricalData(symbol, startDate, endDate);
   }
+
+  getRealTimeData(symbol: string) {
+    return this.financeService.getRealTimeData(symbol);
+  }
 }
