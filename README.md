@@ -49,6 +49,7 @@
 │   │   │   ├── components/      # Componentes comunes (ej. Navbar)
 │   │   │   ├── pipes/           # Pipes compartidos
 │   │   │   ├── directives/      # Directivas reutilizables
+│   │   │   ├── models/          # Modelos
 │   │   ├── features/            # Funcionalidades principales (módulos específicos)
 │   │   │   ├── dashboard/       # Dashboard principal
 │   │   │   │   ├── components/  # Widgets del dashboard
@@ -58,6 +59,7 @@
 │   │   │   │   ├── components/  # Visualización de resultados
 │   │   │   └── settings/        # Configuración del usuario
 │   │   │       ├── components/
+│   │   ├── environments/        # Configuración por entornos
 │   ├── index.html               # Archivo HTML principal
 │   ├── main.ts                  # Punto de entrada de Angular
 │   ├── styles.scss              # Estilos globales

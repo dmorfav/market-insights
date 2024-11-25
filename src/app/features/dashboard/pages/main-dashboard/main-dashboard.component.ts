@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {MatGridList, MatGridTile} from '@angular/material/grid-list';
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/material/card';
+import {FinanceService} from '../../../../core/services/finance/finance.service';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -9,6 +10,12 @@ import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/mat
   standalone: true,
   styleUrl: './main-dashboard.component.scss'
 })
-export class MainDashboardComponent {
+export class MainDashboardComponent implements OnInit {
 
+  private readonly financeService = inject(FinanceService);
+
+  ngOnInit(): void {
+    const data = this.financeService.getHistoricalData('AAPL', '2021-01-01', '2021-12-31');
+    console.log(data());
+  }
 }
