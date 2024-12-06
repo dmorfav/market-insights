@@ -19,7 +19,7 @@ export class FinnhubServiceService implements FinanceProviderInterface {
       symbol,
       from: startDate,
       to: endDate,
-      token: environment.finnhubApiKey,
+      token: environment.FINNHUB_API_KEY,
     };
 
     this.http.get<{ c: number[]; h: number[]; l: number[]; o: number[]; t: number[] }>(
@@ -53,7 +53,7 @@ export class FinnhubServiceService implements FinanceProviderInterface {
 
     const params = {
       symbol,
-      token: environment.finnhubApiKey,
+      token: environment.FINNHUB_API_KEY,
     };
 
     this.http.get<{ c: number; d: number; dp: number; t: number; v: number }>(
