@@ -1,8 +1,11 @@
 export interface HistoricalData {
-  date: string;
+  date: number;
   open: number;
   high: number;
   low: number;
   close: number;
-  volume: number;
+  change?: number;
+  percentChange?: number;
+  previousClose?: number;
+  volume?: number;
 }
