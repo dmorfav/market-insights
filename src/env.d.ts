@@ -1,8 +1,8 @@
 // Define the type of the environment variables.
 declare interface Env {
   readonly NODE_ENV: string;
-  FINNHUB_API_KEY: string;
-  [key: string]: any;
+  readonly NG_APP_FINNHUB_API_KEY: string;
+  readonly NG_APP_FINNHUB_API_URL: string;
 }
 
 // Choose how to access the environment variables.
