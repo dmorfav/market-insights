@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  FINNHUB_API_KEY: import.meta.env.FINNHUB_API_KEY
+  FINNHUB_API_KEY: import.meta.env.NG_APP_FINNHUB_API_KEY,
+  FINNHUB_API_URL: import.meta.env.NG_APP_FINNHUB_API_URL
 };

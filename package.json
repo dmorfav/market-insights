@@ -3,11 +3,11 @@
   "version": "1.0.0-alpha",
   "scripts": {
     "ng": "ng",
-    "start": "NODE_ENV=development ng serve",
-    "build": "NODE_ENV=production ng build",
-    "watch": "NODE_ENV=development ng build --watch --configuration development",
-    "test": "NODE_ENV=test ng test",
-    "test:ci": "NODE_ENV=test ng test --watch=false --browsers=ChromeHeadless --code-coverage"
+    "start": "NG_APP_ENV=development ng serve",
+    "build": "NG_APP_ENV=production ng build",
+    "watch": "NG_APP_ENV=development ng build --watch --configuration development",
+    "test": "ng test",
+    "test:ci": " ng test --watch=false --browsers=ChromeHeadless --code-coverage"
   },
   "private": true,
   "dependencies": {
