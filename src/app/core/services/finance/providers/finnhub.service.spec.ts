@@ -39,10 +39,6 @@ describe('FinnhubService', () => {
 
     req.flush(mockResponse);
     expect(req.request.method).toBe('GET');
-    /*expect(data()).toEqual([
-      { date: '2021-01-01T00:00:00.000Z', open: 100, high: 105, low: 95, close: 100, volume: 0 },
-      { date: '2021-01-02T00:00:00.000Z', open: 101, high: 106, low: 96, close: 102, volume: 0 },
-    ]);*/
 
   });
 
@@ -71,6 +67,43 @@ describe('FinnhubService', () => {
       change: 2,
       volume: 5000,
       timestamp: '2021-01-01T00:00:00.000Z',
+    });
+  });
+
+  it('should fetch symbol list', () => {
+
+    const mockResponse = [
+      {
+        description: 'Apple Inc.',
+        displaySymbol: 'AAPL',
+        symbol: 'AAPL',
+        type: 'Common Stock',
+      },
+      {
+        description: 'Microsoft Corporation',
+        displaySymbol: 'MSFT',
+        symbol: 'MSFT',
+        type: 'Common Stock',
+      }
+    ];
+    const data = service.getSymbolList();
+
+    const req = httpMock.expectOne(
+      `${environment.FINNHUB_API_URL}/stock/symbol?token=${environment.FINNHUB_API_KEY}&exchange=US`
+    );
+    req.flush(mockResponse);
+
+    expect(req.request.method).toBe('GET');
+    expect(data().length).toEqual(2);
+    expect(data()[0]).toEqual({
+      description: 'Apple Inc.',
+      displaySymbol: 'AAPL',
+      symbol: 'AAPL',
+    });
+    expect(data()[1]).toEqual({
+      description: 'Microsoft Corporation',
+      displaySymbol: 'MSFT',
+      symbol: 'MSFT',
     });
   });
 });
