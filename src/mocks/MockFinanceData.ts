@@ -11,7 +11,7 @@ export class MockFinanceData {
     VOLUME: {min: 1000, max: 10000},
   };
 
-  static createMockHistoricalData(symbol: string, startDate: string, endDate: string, count: number): HistoricalData[] {
+  /*static createMockHistoricalData(symbol: string, startDate: string, endDate: string, count: number): HistoricalData[] {
     const start = new Date(startDate);
     const end = new Date(endDate);
     const data: HistoricalData[] = [];
@@ -29,7 +29,7 @@ export class MockFinanceData {
     }
 
     return data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  }
+  }*/
 
   static createMockRealTimeData(symbol: string): RealTimeData {
     return {
