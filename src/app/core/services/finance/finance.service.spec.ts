@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
-import { FinanceService } from './finance.service';
-import { FINANCE_PROVIDER } from '../../providers/finance.provider';
+import {TestBed} from '@angular/core/testing';
+import {FinanceService} from './finance.service';
+import {FINANCE_PROVIDER} from '../../providers/finance.provider';
 import {MockFinanceProvider} from '../../../../mocks/FinanceProvider.mocks';
 
 describe('FinanceService', () => {
@@ -10,7 +10,7 @@ describe('FinanceService', () => {
     TestBed.configureTestingModule({
       providers: [
         FinanceService, // Registrar el servicio bajo prueba
-        { provide: FINANCE_PROVIDER, useClass: MockFinanceProvider } // Registrar el mock para el token
+        {provide: FINANCE_PROVIDER, useClass: MockFinanceProvider} // Registrar el mock para el token
       ]
     });
     service = TestBed.inject(FinanceService); // Inyectar el servicio
@@ -20,21 +20,36 @@ describe('FinanceService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should fetch historical data', () => {
-    const symbol = 'AAPL';
-    const startDate = '2024-01-01';
-    const endDate = '2024-01-31';
-
-    const data = service.getHistoricalData(symbol, startDate, endDate);
-
-    expect(data()).toEqual([{ date: '2024-01-01', open: 100, high: 105, low: 95, close: 100, volume: 1000 }]);
-  });
-
   it('should fetch real time data', () => {
     const symbol = 'AAPL';
 
     const data = service.getRealTimeData(symbol);
 
-    expect(data()).toEqual({ symbol: 'AAPL', price: 150, change: 2, volume: 5000, timestamp: '2024-01-01' });
+    expect(data()).toEqual({symbol: 'AAPL', price: 150, change: 2, volume: 5000, timestamp: '2024-01-01'});
+  });
+
+  it('should return historical data for a valid symbol', () => {
+    const symbol = 'AAPL';
+    const data = service.getDataBySymbol(symbol);
+    expect(data()).toEqual(
+      {
+        date: 3600,
+        open: 150,
+        close: 152,
+        change: 2,
+        high: 155,
+        low: 148,
+        percentChange: 1.33,
+        previousClose: 150
+      }
+    );
+  });
+
+  it('should return a symbol list', () => {
+    const symbols = service.getSymbolList();
+    expect(symbols()).toEqual([
+      { description: '', symbol: 'AAPL', displaySymbol: 'Apple Inc.' },
+      { description: '', symbol: 'GOOGL', displaySymbol: 'Alphabet Inc.' }
+    ]);
   });
 });
