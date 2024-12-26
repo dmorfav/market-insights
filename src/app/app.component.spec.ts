@@ -29,4 +29,14 @@ describe('AppComponent', () => {
     const outlet = fixture.debugElement.query(By.directive(RouterOutlet));  // Busca el RouterOutlet
     expect(outlet).toBeTruthy();  // Verifica que RouterOutlet está presente en el template
   });
+
+  it('should disable context menu on document', () => {
+    const preventDefaultSpy = jasmine.createSpy('preventDefault');
+    const event = new MouseEvent('contextmenu', { bubbles: true });
+    Object.defineProperty(event, 'preventDefault', { value: preventDefaultSpy });
+
+    document.dispatchEvent(event);
+
+    expect(preventDefaultSpy).toHaveBeenCalled();
+  });
 });
