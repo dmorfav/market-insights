@@ -1,0 +1,17 @@
+.skeleton-symbol-card {
+  width: 5rem;
+  height: 4rem;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}

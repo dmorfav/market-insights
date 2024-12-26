@@ -1,0 +1,12 @@
+.symbol-card-common {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border: 0.1rem solid #90caf9;
+  border-radius: 0.8rem;
+  margin-right: 1.5rem;
+  margin-bottom: 0.1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
