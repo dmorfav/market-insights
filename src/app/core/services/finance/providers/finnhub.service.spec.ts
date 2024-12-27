@@ -3,6 +3,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { FinnhubService } from './finnhub.service';
 import { provideHttpClient } from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
+import {provideExperimentalZonelessChangeDetection} from '@angular/core';
 
 describe('FinnhubService', () => {
   let service: FinnhubService;
@@ -10,7 +11,11 @@ describe('FinnhubService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FinnhubService, provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideExperimentalZonelessChangeDetection(),
+        FinnhubService,
+        provideHttpClient(),
+        provideHttpClientTesting()],
     });
     service = TestBed.inject(FinnhubService);
     httpMock = TestBed.inject(HttpTestingController);

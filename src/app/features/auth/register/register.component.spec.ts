@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
+import {provideExperimentalZonelessChangeDetection} from '@angular/core';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -8,11 +9,15 @@ describe('RegisterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegisterComponent]
+      imports: [RegisterComponent],
+      providers: [
+        provideExperimentalZonelessChangeDetection(),
+      ]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(RegisterComponent);
+    await fixture.whenStable();
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
