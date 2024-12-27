@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SymbolCardComponent } from './symbol-card.component';
-import {input} from '@angular/core';
+import {input, provideExperimentalZonelessChangeDetection} from '@angular/core';
 
 describe('SymbolCardComponent', () => {
   let component: SymbolCardComponent;
@@ -9,13 +9,17 @@ describe('SymbolCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SymbolCardComponent]
+      imports: [SymbolCardComponent],
+      providers: [
+        provideExperimentalZonelessChangeDetection()
+      ]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(SymbolCardComponent);
     fixture.componentRef.setInput('symbol', {displaySymbol: 'AAPL', description: 'Apple Inc.'});
     fixture.componentRef.setInput('isFavorite', false);
+    await fixture.whenStable();
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

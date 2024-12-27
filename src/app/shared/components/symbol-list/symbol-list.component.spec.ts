@@ -3,7 +3,7 @@ import {SymbolListComponent} from './symbol-list.component';
 import {FinanceService} from '../../../core/services/finance/finance.service';
 import {LocalService} from '../../../core/services/storage/local.service';
 import {ExSymbol} from '../../models/Interface/symbol';
-import {signal} from '@angular/core';
+import {provideExperimentalZonelessChangeDetection, signal} from '@angular/core';
 
 describe('SymbolListComponent', () => {
   let component: SymbolListComponent;
@@ -17,6 +17,7 @@ describe('SymbolListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SymbolListComponent],
       providers: [
+        provideExperimentalZonelessChangeDetection(),
         {provide: FinanceService, useValue: financeServiceSpy},
       ],
     }).compileComponents();
