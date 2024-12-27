@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LoginComponent } from './login.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthService } from '../../../core/services/auth/auth.service';
-import { Router } from '@angular/router';
-import {signal} from "@angular/core";
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {LoginComponent} from './login.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {AuthService} from '../../../core/services/auth/auth.service';
+import {Router} from '@angular/router';
+import {provideExperimentalZonelessChangeDetection, signal} from "@angular/core";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -19,13 +19,15 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       imports: [LoginComponent, ReactiveFormsModule, NoopAnimationsModule],
       providers: [
-        { provide: AuthService, useValue: mockAuthService },
-        { provide: Router, useValue: mockRouter }
+        {provide: AuthService, useValue: mockAuthService},
+        {provide: Router, useValue: mockRouter},
+        provideExperimentalZonelessChangeDetection()
       ]
     })
-        .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
+    await fixture.whenStable();
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -38,7 +40,7 @@ describe('LoginComponent', () => {
     const loginResponse = signal(true);
     mockAuthService.login.and.returnValue(loginResponse);
 
-    component['loginForm'].setValue({ email: 'admin@example.com', password: 'admin123' });
+    component['loginForm'].setValue({email: 'admin@example.com', password: 'admin123'});
     component.onSubmit();
 
     expect(mockAuthService.login).toHaveBeenCalledWith('admin@example.com', 'admin123');
@@ -50,7 +52,7 @@ describe('LoginComponent', () => {
     mockAuthService.login.and.returnValue(loginResponse);
 
     spyOn(window, 'alert');
-    component['loginForm'].setValue({ email: 'invalid@example.com', password: 'wrongpassword' });
+    component['loginForm'].setValue({email: 'invalid@example.com', password: 'wrongpassword'});
     component.onSubmit();
 
     expect(window.alert).toHaveBeenCalledWith('Invalid credentials');
