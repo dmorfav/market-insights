@@ -1,8 +1,8 @@
 # Market Insights Dashboard
 
-[![codecov](https://codecov.io/gh/dmorfav/market-insights/graph/badge.svg?token=QNM9te29rv)](https://codecov.io/gh/dmorfav/market-insights) 
+[![codecov](https://codecov.io/gh/dmorfav/tradewise/graph/badge.svg?token=QNM9te29rv)](https://codecov.io/gh/dmorfav/tradewise) 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a416c087-64eb-4eb5-aec8-10aaabaed461/deploy-status)](https://app.netlify.com/sites/mymarketinsights/deploys)
-[![Build, Test, and Upload Coverage](https://github.com/dmorfav/market-insights/actions/workflows/build.yml/badge.svg)](https://github.com/dmorfav/market-insights/actions/workflows/build.yml)
+[![Build, Test, and Upload Coverage](https://github.com/dmorfav/tradewise/actions/workflows/build.yml/badge.svg)](https://github.com/dmorfav/tradewise/actions/workflows/build.yml)
 
 ## 🌟 **Descripción**
 **Market Insights Dashboard** es una aplicación desarrollada en Angular 19 que combina la potencia del framework, algoritmos **metaheurísticos** y visualizaciones avanzadas para ofrecer análisis en tiempo real de datos financieros. Este proyecto busca mostrar el potencial de Angular en la gestión de altos volúmenes de datos, su capacidad de reactividad y modularidad, y cómo utilizar cálculos avanzados en segundo plano mediante **web workers**.
@@ -78,8 +78,8 @@ Sigue los pasos para poner en marcha el proyecto localmente.
 
 ### **1. Clonar el repositorio**
 ```bash
-git clone git@github.com:dmorfav/market-insights.git
-cd market-insights
+git clone git@github.com:dmorfav/tradewise.git
+cd tradewise
 ```
 
 ### **2. Instalar dependencias**
