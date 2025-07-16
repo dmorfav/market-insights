@@ -1,4 +1,4 @@
-# Market Insights Dashboard
+# Tradewise Dashboard
 
 [![codecov](https://codecov.io/gh/dmorfav/tradewise/graph/badge.svg?token=QNM9te29rv)](https://codecov.io/gh/dmorfav/tradewise) 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a416c087-64eb-4eb5-aec8-10aaabaed461/deploy-status)](https://app.netlify.com/sites/mymarketinsights/deploys)
