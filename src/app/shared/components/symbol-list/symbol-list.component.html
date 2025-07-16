@@ -1,16 +1,21 @@
+<button mat-icon-button (click)="showOnlyFavorites()">
+  <mat-icon>
+    {{ onlyFavorites() ? 'star' : 'star_border' }}
+  </mat-icon>
+</button>
 <div class="virtual-scroll-carousel">
   <cdk-virtual-scroll-viewport
     itemSize="90"
     orientation="horizontal"
     class="virtual-viewport"
   >
-  @defer (when symbolList()?.length){
+  @defer (when symbolList().length){
       <app-symbol-card
         *cdkVirtualFor="let symbol of symbolList()"
         [symbol]="symbol"
         [isFavorite]="isFavorite(symbol)"
         (toggleFavorite)="toggleFavorite(symbol)"
-      ></app-symbol-card>
+      />
   } @placeholder (minimum 2s){
     @for (item of placeholders; track item){
       <app-symbol-card-sk />

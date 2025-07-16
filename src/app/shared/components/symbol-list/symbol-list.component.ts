@@ -1,10 +1,12 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, inject, OnInit, signal} from '@angular/core';
 import {CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 import {SymbolCardComponent} from '../symbol-card/symbol-card.component';
 import {ExSymbol} from '../../models/Interface/symbol';
 import {FinanceService} from '../../../core/services/finance/finance.service';
 import {SymbolCardSKComponent} from '../skeletons/symbol-card-sk/symbol-card-sk.component';
 import {LocalService} from '../../../core/services/storage/local.service';
+import {MatIconButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-symbol-list',
@@ -13,29 +15,40 @@ import {LocalService} from '../../../core/services/storage/local.service';
     CdkVirtualForOf,
     CdkVirtualScrollViewport,
     SymbolCardComponent,
-    SymbolCardSKComponent
+    SymbolCardSKComponent,
+    MatIconButton,
+    MatIcon
   ],
   templateUrl: './symbol-list.component.html',
   styleUrl: './symbol-list.component.scss',
   standalone: true
 })
 export class SymbolListComponent implements OnInit {
-  protected symbolList = signal<ExSymbol[] | undefined>(undefined);
   protected favorites = new Set<string>();
+  protected onlyFavorites = signal(false);
   protected placeholders = Array.from({length: 50}, (_, i) => i + 1);
+
   private readonly financeService = inject(FinanceService);
+  private readonly symbolListSignal = this.financeService.getSymbolList();
+
+  protected symbolList = computed(() => {
+    const allSymbols = this.symbolListSignal();
+    if (this.onlyFavorites()) {
+      return allSymbols.filter((symbol: ExSymbol) => this.favorites.has(symbol.displaySymbol));
+    }
+    return allSymbols;
+  });
 
 
   ngOnInit(): void {
-    this.loadSymbolList();
     this.loadFavorites();
   }
 
-  isFavorite(symbol: ExSymbol): boolean {
+  protected isFavorite(symbol: ExSymbol): boolean {
     return this.favorites.has(symbol.displaySymbol);
   }
 
-  toggleFavorite(symbol: ExSymbol): void {
+  protected toggleFavorite(symbol: ExSymbol): void {
     if (this.favorites.has(symbol.displaySymbol)) {
       this.favorites.delete(symbol.displaySymbol);
     } else {
@@ -44,8 +57,8 @@ export class SymbolListComponent implements OnInit {
     this.saveFavorites();
   }
 
-  private loadSymbolList(): void {
-    this.symbolList = this.financeService.getSymbolList();
+  protected showOnlyFavorites(): void {
+    this.onlyFavorites.set(!this.onlyFavorites());
   }
 
   private saveFavorites(): void {
