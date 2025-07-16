@@ -30,7 +30,7 @@
     "@angular/build": "^20.1.1",
     "@angular/cli": "^20.1.1",
     "@angular/compiler-cli": "^20.1.1",
-    "@ngx-env/builder": "^19.0.2",
+    "@ngx-env/builder": "^20.1.0",
     "@types/jasmine": "~5.1.0",
     "codecov": "^3.8.2",
     "jasmine-core": "~5.4.0",
