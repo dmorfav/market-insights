@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SymbolCardComponent } from './symbol-card.component';
-import {input, provideExperimentalZonelessChangeDetection} from '@angular/core';
+import {input, provideZonelessChangeDetection} from '@angular/core';
 
 describe('SymbolCardComponent', () => {
   let component: SymbolCardComponent;
@@ -11,7 +11,7 @@ describe('SymbolCardComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SymbolCardComponent],
       providers: [
-        provideExperimentalZonelessChangeDetection()
+        provideZonelessChangeDetection()
       ]
     })
     .compileComponents();

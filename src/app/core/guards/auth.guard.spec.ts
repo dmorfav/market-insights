@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AuthGuard } from './auth.guard';
 import { Router } from '@angular/router';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
+import {provideZonelessChangeDetection} from '@angular/core';
 
 describe('AuthGuard', () => {
   let authGuard: AuthGuard;
@@ -14,7 +14,7 @@ describe('AuthGuard', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        provideExperimentalZonelessChangeDetection(),
+        provideZonelessChangeDetection(),
         AuthGuard,
         { provide: Router, useValue: routerMock }
       ]

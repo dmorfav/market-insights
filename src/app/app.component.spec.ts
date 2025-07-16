@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterOutlet } from '@angular/router';
 import {By} from '@angular/platform-browser';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
+import {provideZonelessChangeDetection} from '@angular/core';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -11,7 +11,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [RouterOutlet, AppComponent],
-      providers: [provideExperimentalZonelessChangeDetection()]
+      providers: [provideZonelessChangeDetection()]
     });
 
     fixture = TestBed.createComponent(AppComponent);

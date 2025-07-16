@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { MockFinanceService } from './mock-finance.service';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
+import {provideZonelessChangeDetection} from '@angular/core';
 
 describe('MockFinanceService', () => {
   let service: MockFinanceService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideExperimentalZonelessChangeDetection()]
+      providers: [provideZonelessChangeDetection()]
     });
     service = TestBed.inject(MockFinanceService);
   });

@@ -3,7 +3,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { FinnhubService } from './finnhub.service';
 import { provideHttpClient } from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
+import {provideZonelessChangeDetection} from '@angular/core';
 
 describe('FinnhubService', () => {
   let service: FinnhubService;
@@ -12,7 +12,7 @@ describe('FinnhubService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        provideExperimentalZonelessChangeDetection(),
+        provideZonelessChangeDetection(),
         FinnhubService,
         provideHttpClient(),
         provideHttpClientTesting()],

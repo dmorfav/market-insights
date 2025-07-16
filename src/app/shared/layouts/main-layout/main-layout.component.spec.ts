@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MainLayoutComponent} from './main-layout.component';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
+import {provideZonelessChangeDetection} from '@angular/core';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
@@ -11,7 +11,7 @@ describe('MainLayoutComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MainLayoutComponent],
       providers: [
-        provideExperimentalZonelessChangeDetection()
+        provideZonelessChangeDetection()
       ]
     })
       .compileComponents();

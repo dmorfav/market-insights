@@ -4,7 +4,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthService} from '../../../core/services/auth/auth.service';
 import {Router} from '@angular/router';
-import {provideExperimentalZonelessChangeDetection, signal} from "@angular/core";
+import {provideZonelessChangeDetection, signal} from "@angular/core";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -21,7 +21,7 @@ describe('LoginComponent', () => {
       providers: [
         {provide: AuthService, useValue: mockAuthService},
         {provide: Router, useValue: mockRouter},
-        provideExperimentalZonelessChangeDetection()
+        provideZonelessChangeDetection()
       ]
     })
       .compileComponents();

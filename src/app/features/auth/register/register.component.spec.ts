@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
+import {provideZonelessChangeDetection} from '@angular/core';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -11,7 +11,7 @@ describe('RegisterComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RegisterComponent],
       providers: [
-        provideExperimentalZonelessChangeDetection(),
+        provideZonelessChangeDetection(),
       ]
     })
     .compileComponents();

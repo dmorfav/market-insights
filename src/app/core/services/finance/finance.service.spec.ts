@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 import {FinanceService} from './finance.service';
 import {FINANCE_PROVIDER} from '../../providers/finance.provider';
 import {MockFinanceProvider} from '../../../../mocks/FinanceProvider.mocks';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
+import {provideZonelessChangeDetection} from '@angular/core';
 
 describe('FinanceService', () => {
   let service: FinanceService;
@@ -10,7 +10,7 @@ describe('FinanceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        provideExperimentalZonelessChangeDetection(),
+        provideZonelessChangeDetection(),
         FinanceService, // Registrar el servicio bajo prueba
         {provide: FINANCE_PROVIDER, useClass: MockFinanceProvider} // Registrar el mock para el token
       ]

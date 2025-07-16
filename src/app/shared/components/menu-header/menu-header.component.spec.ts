@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
+import {provideZonelessChangeDetection} from '@angular/core';
 
 describe('MenuHeaderComponent', () => {
   let component: MenuHeaderComponent;
@@ -20,7 +20,7 @@ describe('MenuHeaderComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MenuHeaderComponent, MatToolbarModule, MatIconModule, MatButtonModule],
       providers: [
-        provideExperimentalZonelessChangeDetection(),
+        provideZonelessChangeDetection(),
         { provide: AuthService, useValue: mockAuthService },
         { provide: Router, useValue: mockRouter }
       ]

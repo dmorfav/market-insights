@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthLayoutComponent } from './auth-layout.component';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
+import {provideZonelessChangeDetection} from '@angular/core';
 
 describe('AuthLayoutComponent', () => {
   let component: AuthLayoutComponent;
@@ -11,7 +11,7 @@ describe('AuthLayoutComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AuthLayoutComponent],
       providers: [
-        provideExperimentalZonelessChangeDetection()
+        provideZonelessChangeDetection()
       ]
     })
     .compileComponents();
