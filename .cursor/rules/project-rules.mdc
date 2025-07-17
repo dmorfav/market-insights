@@ -88,4 +88,4 @@ export interface ChartSelectEvent {
 	•	OnPush + signals verificados en pruebas.
 	•	Storybook actualizado.
 	•	.spec.ts con snapshot de EChartsOption.
-	•	Cumple R-1 … R-12 sin excepciones.
+	•	Cumple R-1 … R-13 sin excepciones.
