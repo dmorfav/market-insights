@@ -1,7 +1,7 @@
 # Tradewise Dashboard
 
 [![codecov](https://codecov.io/gh/dmorfav/tradewise/graph/badge.svg?token=QNM9te29rv)](https://codecov.io/gh/dmorfav/tradewise) 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/a416c087-64eb-4eb5-aec8-10aaabaed461/deploy-status)](https://app.netlify.com/sites/mymarketinsights/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0f72362f-792c-47db-abc1-c37372b66708/deploy-status)](https://app.netlify.com/projects/tradewise-io/deploys)
 [![Build, Test, and Upload Coverage](https://github.com/dmorfav/tradewise/actions/workflows/build.yml/badge.svg)](https://github.com/dmorfav/tradewise/actions/workflows/build.yml)
 
 ## Visión general
