@@ -12,12 +12,38 @@ import { FINANCE_PROVIDER } from '../../providers/finance.provider';
 export class FinanceService {
   private readonly financeService = inject<FinanceProviderInterface>(FINANCE_PROVIDER);
 
+  /**
+   * Caché interna para los datos históricos por *symbol*.
+   * Evita disparar múltiples peticiones HTTP al proveedor cuando varias
+   * gráficas o componentes solicitan el mismo recurso.
+   */
+  private readonly historicalCache = new Map<string, WritableSignal<HistoricalData>>();
+
+  /**
+   * Caché interna para los datos en tiempo real por *symbol*.
+   */
+  private readonly realTimeCache = new Map<string, WritableSignal<RealTimeData>>();
+
   getDataBySymbol(symbol: string): WritableSignal<HistoricalData> {
-    return this.financeService.getDataBySymbol(symbol);
+    const cached = this.historicalCache.get(symbol);
+    if (cached) {
+      return cached;
+    }
+
+    const signal = this.financeService.getDataBySymbol(symbol);
+    this.historicalCache.set(symbol, signal);
+    return signal;
   }
 
   getRealTimeData(symbol: string): WritableSignal<RealTimeData> {
-    return this.financeService.getRealTimeData(symbol);
+    const cached = this.realTimeCache.get(symbol);
+    if (cached) {
+      return cached;
+    }
+
+    const signal = this.financeService.getRealTimeData(symbol);
+    this.realTimeCache.set(symbol, signal);
+    return signal;
   }
 
   getSymbolList(): WritableSignal<ExSymbol[]> {

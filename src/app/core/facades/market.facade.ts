@@ -21,7 +21,9 @@ export class MarketFacade {
   );
 
   selectSymbol(symbol: string): void {
-    this._selectedSymbol.set(symbol);
+    if (this._selectedSymbol() !== symbol) {
+      this._selectedSymbol.set(symbol);
+    }
   }
 
   readonly vm$ = computed(() => ({
