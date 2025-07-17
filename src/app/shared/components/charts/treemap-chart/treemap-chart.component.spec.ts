@@ -1,8 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TreemapChartComponent } from './treemap-chart.component';
 import { provideZonelessChangeDetection, importProvidersFrom } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgxEchartsModule } from 'ngx-echarts';
+
 import { TreemapNode } from '../../../../core/services/chart/chart-facade.service';
+
+import { TreemapChartComponent } from './treemap-chart.component';
 
 describe('TreemapChartComponent', () => {
   let component: TreemapChartComponent;
@@ -13,8 +15,8 @@ describe('TreemapChartComponent', () => {
       imports: [TreemapChartComponent],
       providers: [
         provideZonelessChangeDetection(),
-        importProvidersFrom(NgxEchartsModule.forRoot({ echarts: () => import('echarts') })),
-      ],
+        importProvidersFrom(NgxEchartsModule.forRoot({ echarts: () => import('echarts') }))
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TreemapChartComponent);
@@ -27,9 +29,9 @@ describe('TreemapChartComponent', () => {
         name: 'Root',
         children: [
           { name: 'Child A', value: 40 },
-          { name: 'Child B', value: 60 },
-        ],
-      },
+          { name: 'Child B', value: 60 }
+        ]
+      }
     ];
 
     fixture.componentRef.setInput('data', data);
@@ -39,4 +41,4 @@ describe('TreemapChartComponent', () => {
     const opts = component.options();
     expect((opts.series as any[])[0].type).toBe('treemap');
   });
-}); 
+});

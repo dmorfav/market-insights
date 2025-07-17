@@ -1,8 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { ChangeDetectionStrategy, Component, computed, input, inject } from '@angular/core';
 import type { EChartsOption } from 'echarts';
-import { ChartFacadeService, BoxplotPoint } from '../../../../core/services/chart/chart-facade.service';
+import { NgxEchartsModule } from 'ngx-echarts';
+
+import {
+  ChartFacadeService,
+  BoxplotPoint
+} from '../../../../core/services/chart/chart-facade.service';
 
 @Component({
   selector: 'app-boxplot-chart',
@@ -13,11 +17,11 @@ import { ChartFacadeService, BoxplotPoint } from '../../../../core/services/char
         width: 100%;
         height: 300px;
       }
-    `,
+    `
   ],
   standalone: true,
   imports: [CommonModule, NgxEchartsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoxplotChartComponent {
   data = input.required<readonly BoxplotPoint[]>();
@@ -25,4 +29,4 @@ export class BoxplotChartComponent {
   private readonly facade = inject(ChartFacadeService);
 
   readonly options = computed((): EChartsOption => this.facade.buildBoxplotOptions(this.data()));
-} 
+}

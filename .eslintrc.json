@@ -1,6 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
+  "plugins": ["import", "prettier"],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -8,6 +8,7 @@
         "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
+      "plugins": ["import"],
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
@@ -30,13 +31,27 @@
             "newlines-between": "always",
             "alphabetize": { "order": "asc", "caseInsensitive": true }
           }
-        ]
+        ],
+        "prettier/prettier": "warn"
       }
     },
     {
       "files": ["*.html"],
       "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
+    },
+    {
+      "files": ["*.spec.ts"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": "off"
+      }
+    },
+    {
+      "files": ["*.d.ts"],
+      "rules": {
+        "@typescript-eslint/no-empty-interface": "off"
+      }
     }
   ]
 } 

@@ -1,8 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { ChangeDetectionStrategy, Component, computed, input, inject } from '@angular/core';
 import type { EChartsOption } from 'echarts';
-import { ChartFacadeService, BumpSeries } from '../../../../core/services/chart/chart-facade.service';
+import { NgxEchartsModule } from 'ngx-echarts';
+
+import {
+  ChartFacadeService,
+  BumpSeries
+} from '../../../../core/services/chart/chart-facade.service';
 
 @Component({
   selector: 'app-bump-chart',
@@ -13,11 +17,11 @@ import { ChartFacadeService, BumpSeries } from '../../../../core/services/chart/
         width: 100%;
         height: 300px;
       }
-    `,
+    `
   ],
   standalone: true,
   imports: [CommonModule, NgxEchartsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BumpChartComponent {
   data = input.required<readonly BumpSeries[]>();
@@ -25,4 +29,4 @@ export class BumpChartComponent {
   private readonly facade = inject(ChartFacadeService);
 
   readonly options = computed((): EChartsOption => this.facade.buildBumpOptions(this.data()));
-} 
+}

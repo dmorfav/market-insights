@@ -1,13 +1,12 @@
+import { provideZonelessChangeDetection } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+
 import { LocalService } from './local.service';
-import {TestBed} from '@angular/core/testing';
-import {provideZonelessChangeDetection} from '@angular/core';
 
 describe('LocalService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        provideZonelessChangeDetection(),
-      ]
+      providers: [provideZonelessChangeDetection()]
     });
     localStorage.clear();
   });
@@ -102,9 +101,7 @@ describe('LocalService', () => {
 
       LocalService.clear();
 
-      expect(console.error).toHaveBeenCalledWith(
-        'Error limpiando localStorage: Error: Test error'
-      );
+      expect(console.error).toHaveBeenCalledWith('Error limpiando localStorage: Error: Test error');
     });
   });
 

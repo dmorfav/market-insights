@@ -19,7 +19,7 @@ import { RouterOutlet } from '@angular/router';
         height: 100vh;
         background-color: #f5f5f5;
       }
-    `,
-  ],
+    `
+  ]
 })
 export class AuthLayoutComponent {}

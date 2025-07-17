@@ -1,8 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BumpChartComponent } from './bump-chart.component';
-import { BumpSeries } from '../../../../core/services/chart/chart-facade.service';
 import { provideZonelessChangeDetection, importProvidersFrom } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgxEchartsModule } from 'ngx-echarts';
+
+import { BumpSeries } from '../../../../core/services/chart/chart-facade.service';
+
+import { BumpChartComponent } from './bump-chart.component';
 
 describe('BumpChartComponent', () => {
   let component: BumpChartComponent;
@@ -13,8 +15,8 @@ describe('BumpChartComponent', () => {
       imports: [BumpChartComponent],
       providers: [
         provideZonelessChangeDetection(),
-        importProvidersFrom(NgxEchartsModule.forRoot({ echarts: () => import('echarts') })),
-      ],
+        importProvidersFrom(NgxEchartsModule.forRoot({ echarts: () => import('echarts') }))
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BumpChartComponent);
@@ -27,9 +29,9 @@ describe('BumpChartComponent', () => {
         name: 'Series A',
         points: [
           { time: 1, rank: 2 },
-          { time: 2, rank: 1 },
-        ],
-      },
+          { time: 2, rank: 1 }
+        ]
+      }
     ];
 
     fixture.componentRef.setInput('data', series);
@@ -42,9 +44,7 @@ describe('BumpChartComponent', () => {
   });
 
   it('should render chart container in DOM', async () => {
-    const series: BumpSeries[] = [
-      { name: 'Series A', points: [{ time: 1, rank: 1 }] },
-    ];
+    const series: BumpSeries[] = [{ name: 'Series A', points: [{ time: 1, rank: 1 }] }];
 
     fixture.componentRef.setInput('data', series);
     fixture.detectChanges();
@@ -53,4 +53,4 @@ describe('BumpChartComponent', () => {
     const container = fixture.nativeElement.querySelector('.chart-container');
     expect(container).toBeTruthy();
   });
-}); 
+});

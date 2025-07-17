@@ -1,9 +1,10 @@
-import {Component, inject} from '@angular/core';
-import {MatToolbar} from '@angular/material/toolbar';
-import {MatIcon} from '@angular/material/icon';
-import {MatIconButton} from '@angular/material/button';
-import {AuthService} from '../../../core/services/auth/auth.service';
-import {Router} from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatToolbar } from '@angular/material/toolbar';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-menu-header',
@@ -13,7 +14,6 @@ import {Router} from '@angular/router';
   standalone: true
 })
 export class MenuHeaderComponent {
-
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 

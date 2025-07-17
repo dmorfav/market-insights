@@ -1,8 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StackedAreaChartComponent } from './stacked-area-chart.component';
-import { StackedAreaSeries } from '../../../../core/services/chart/chart-facade.service';
 import { provideZonelessChangeDetection, importProvidersFrom } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgxEchartsModule } from 'ngx-echarts';
+
+import { StackedAreaSeries } from '../../../../core/services/chart/chart-facade.service';
+
+import { StackedAreaChartComponent } from './stacked-area-chart.component';
 
 describe('StackedAreaChartComponent', () => {
   let component: StackedAreaChartComponent;
@@ -13,8 +15,8 @@ describe('StackedAreaChartComponent', () => {
       imports: [StackedAreaChartComponent],
       providers: [
         provideZonelessChangeDetection(),
-        importProvidersFrom(NgxEchartsModule.forRoot({ echarts: () => import('echarts') })),
-      ],
+        importProvidersFrom(NgxEchartsModule.forRoot({ echarts: () => import('echarts') }))
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(StackedAreaChartComponent);
@@ -27,16 +29,16 @@ describe('StackedAreaChartComponent', () => {
         name: 'Series A',
         points: [
           { time: 1, value: 10 },
-          { time: 2, value: 15 },
-        ],
+          { time: 2, value: 15 }
+        ]
       },
       {
         name: 'Series B',
         points: [
           { time: 1, value: 5 },
-          { time: 2, value: 8 },
-        ],
-      },
+          { time: 2, value: 8 }
+        ]
+      }
     ];
 
     fixture.componentRef.setInput('data', series);
@@ -50,9 +52,7 @@ describe('StackedAreaChartComponent', () => {
   });
 
   it('should render chart container in DOM', async () => {
-    const series: StackedAreaSeries[] = [
-      { name: 'Series A', points: [{ time: 1, value: 10 }] },
-    ];
+    const series: StackedAreaSeries[] = [{ name: 'Series A', points: [{ time: 1, value: 10 }] }];
     fixture.componentRef.setInput('data', series);
     fixture.detectChanges();
     await fixture.whenStable();
@@ -60,4 +60,4 @@ describe('StackedAreaChartComponent', () => {
     const container = fixture.nativeElement.querySelector('.chart-container');
     expect(container).toBeTruthy();
   });
-}); 
+});

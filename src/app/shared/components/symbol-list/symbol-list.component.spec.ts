@@ -1,15 +1,17 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {SymbolListComponent} from './symbol-list.component';
-import {FinanceService} from '../../../core/services/finance/finance.service';
-import {LocalService} from '../../../core/services/storage/local.service';
-import {ExSymbol} from '../../models/Interface/symbol';
-import {provideZonelessChangeDetection, signal} from '@angular/core';
+import { provideZonelessChangeDetection, signal } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { FinanceService } from '../../../core/services/finance/finance.service';
+import { LocalService } from '../../../core/services/storage/local.service';
+import { ExSymbol } from '../../models/Interface/symbol';
+
+import { SymbolListComponent } from './symbol-list.component';
 
 describe('SymbolListComponent', () => {
   let component: SymbolListComponent;
   let fixture: ComponentFixture<SymbolListComponent>;
   let financeService: jasmine.SpyObj<FinanceService>;
-  let mockSymbol: ExSymbol = {symbol: 'AAPL', description: 'Apple Inc.', displaySymbol: 'AAPL'};
+  const mockSymbol: ExSymbol = { symbol: 'AAPL', description: 'Apple Inc.', displaySymbol: 'AAPL' };
 
   beforeEach(async () => {
     const financeServiceSpy = jasmine.createSpyObj('FinanceService', ['getSymbolList']);
@@ -19,8 +21,8 @@ describe('SymbolListComponent', () => {
       imports: [SymbolListComponent],
       providers: [
         provideZonelessChangeDetection(),
-        {provide: FinanceService, useValue: financeServiceSpy},
-      ],
+        { provide: FinanceService, useValue: financeServiceSpy }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SymbolListComponent);
@@ -57,14 +59,11 @@ describe('SymbolListComponent', () => {
     (component as any).toggleFavorite(mockSymbol);
 
     expect((component as any).isFavorite(mockSymbol)).toBeFalse();
-    expect(LocalService.setItem).toHaveBeenCalledWith(
-      'favorites',
-      JSON.stringify([])
-    );
+    expect(LocalService.setItem).toHaveBeenCalledWith('favorites', JSON.stringify([]));
   });
 
   it('should handle empty or invalid favorites in LocalStorage gracefully', () => {
-   spyOn(LocalService, 'getItem').and.returnValue(null);
+    spyOn(LocalService, 'getItem').and.returnValue(null);
     component.ngOnInit();
 
     expect((component as any).isFavorite(mockSymbol)).toBeFalse();

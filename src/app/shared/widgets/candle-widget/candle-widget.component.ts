@@ -1,17 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-  computed,
-  effect,
-} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, input, computed, effect } from '@angular/core';
 import { MatCard } from '@angular/material/card';
-import { CandleChartComponent } from '../../components/charts/candle-chart/candle-chart.component';
+
 import { MarketFacade } from '../../../core/facades/market.facade';
 import { CandlePoint } from '../../../core/services/chart/chart-facade.service';
 import { MockChartDataService } from '../../../core/services/chart/mock-chart-data.service';
+import { CandleChartComponent } from '../../components/charts/candle-chart/candle-chart.component';
 
 @Component({
   selector: 'app-candle-widget',
@@ -42,11 +36,11 @@ import { MockChartDataService } from '../../../core/services/chart/mock-chart-da
         width: 100%;
         height: 400px;
       }
-    `,
+    `
   ],
   standalone: true,
   imports: [CommonModule, MatCard, CandleChartComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CandleWidgetComponent {
   symbol = input.required<string>();
@@ -69,13 +63,13 @@ export class CandleWidgetComponent {
       open: historical.open ?? 0,
       high: historical.high ?? 0,
       low: historical.low ?? 0,
-      close: historical.close ?? 0,
+      close: historical.close ?? 0
     } as const;
 
     return {
       ...stats,
       symbol: this.symbol(),
-      candles: this.candlesSignal(),
+      candles: this.candlesSignal()
     };
   });
-} 
+}

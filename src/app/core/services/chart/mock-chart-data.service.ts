@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { CandlePoint, AreaPoint, BoxplotPoint } from './chart-facade.service';
+
+import {
+  CandlePoint,
+  AreaPoint,
+  BoxplotPoint,
+  TreemapNode
+} from './chart-facade.service';
 
 @Injectable({ providedIn: 'root' })
 export class MockChartDataService {
@@ -16,7 +22,13 @@ export class MockChartDataService {
       const high = open + Math.random() * 5;
       const low = open - Math.random() * 5;
       const close = low + Math.random() * (high - low);
-      candles.push({ time, open: this.round(open), high: this.round(high), low: this.round(low), close: this.round(close) });
+      candles.push({
+        time,
+        open: this.round(open),
+        high: this.round(high),
+        low: this.round(low),
+        close: this.round(close)
+      });
       lastClose = close;
     }
     return candles;
@@ -55,7 +67,7 @@ export class MockChartDataService {
         arr[Math.floor(arr.length * 0.25)],
         arr[Math.floor(arr.length * 0.5)],
         arr[Math.floor(arr.length * 0.75)],
-        arr[arr.length - 1],
+        arr[arr.length - 1]
       ];
       data.push({ name: `Cat ${i + 1}`, values });
     }
@@ -83,14 +95,14 @@ export class MockChartDataService {
     return slices;
   }
 
-  generateTreeData(depth = 2, breadth = 3): any[] {
-    const makeNode = (level: number): any => {
+  generateTreeData(depth = 2, breadth = 3): TreemapNode[] {
+    const makeNode = (level: number): TreemapNode => {
       if (level === depth) {
         return { name: `Leaf`, value: this.round(Math.random() * 100) };
       }
       return {
         name: `Node L${level}`,
-        children: Array.from({ length: breadth }, () => makeNode(level + 1)),
+        children: Array.from({ length: breadth }, () => makeNode(level + 1))
       };
     };
     return [makeNode(0)];
@@ -99,4 +111,4 @@ export class MockChartDataService {
   private round(v: number): number {
     return Math.round(v * 100) / 100;
   }
-} 
+}

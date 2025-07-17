@@ -1,7 +1,7 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SymbolCardSKComponent } from './symbol-card-sk.component';
-import {provideZonelessChangeDetection} from '@angular/core';
 
 describe('SymbolCardSKComponent', () => {
   let component: SymbolCardSKComponent;
@@ -10,11 +10,8 @@ describe('SymbolCardSKComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SymbolCardSKComponent],
-      providers: [
-        provideZonelessChangeDetection()
-      ]
-    })
-    .compileComponents();
+      providers: [provideZonelessChangeDetection()]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SymbolCardSKComponent);
     await fixture.whenStable();

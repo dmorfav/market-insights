@@ -1,7 +1,8 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { AuthGuard } from './auth.guard';
 import { Router } from '@angular/router';
-import {provideZonelessChangeDetection} from '@angular/core';
+
+import { AuthGuard } from './auth.guard';
 
 describe('AuthGuard', () => {
   let authGuard: AuthGuard;

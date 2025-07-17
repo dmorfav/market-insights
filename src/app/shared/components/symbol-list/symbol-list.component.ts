@@ -1,12 +1,17 @@
-import {Component, computed, inject, OnInit, signal} from '@angular/core';
-import {CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
-import {SymbolCardComponent} from '../symbol-card/symbol-card.component';
-import {ExSymbol} from '../../models/Interface/symbol';
-import {FinanceService} from '../../../core/services/finance/finance.service';
-import {SymbolCardSKComponent} from '../skeletons/symbol-card-sk/symbol-card-sk.component';
-import {LocalService} from '../../../core/services/storage/local.service';
-import {MatIconButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
+import {
+  CdkFixedSizeVirtualScroll,
+  CdkVirtualForOf,
+  CdkVirtualScrollViewport
+} from '@angular/cdk/scrolling';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+
+import { FinanceService } from '../../../core/services/finance/finance.service';
+import { LocalService } from '../../../core/services/storage/local.service';
+import { ExSymbol } from '../../models/Interface/symbol';
+import { SymbolCardSKComponent } from '../skeletons/symbol-card-sk/symbol-card-sk.component';
+import { SymbolCardComponent } from '../symbol-card/symbol-card.component';
 
 @Component({
   selector: 'app-symbol-list',
@@ -26,7 +31,7 @@ import {MatIcon} from '@angular/material/icon';
 export class SymbolListComponent implements OnInit {
   protected favorites = new Set<string>();
   protected onlyFavorites = signal(false);
-  protected placeholders = Array.from({length: 50}, (_, i) => i + 1);
+  protected placeholders = Array.from({ length: 50 }, (_, i) => i + 1);
 
   private readonly financeService = inject(FinanceService);
   private readonly symbolListSignal = this.financeService.getSymbolList();
@@ -38,7 +43,6 @@ export class SymbolListComponent implements OnInit {
     }
     return allSymbols;
   });
-
 
   ngOnInit(): void {
     this.loadFavorites();
@@ -71,5 +75,4 @@ export class SymbolListComponent implements OnInit {
       this.favorites = new Set(JSON.parse(String(saved)));
     }
   }
-
 }

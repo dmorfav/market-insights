@@ -1,12 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PriceCardWidgetComponent } from './price-card-widget.component';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { FinanceService } from '../../../core/services/finance/finance.service';
-import { FINANCE_PROVIDER } from '../../../core/providers/finance.provider';
+import { importProvidersFrom } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgxEchartsModule } from 'ngx-echarts';
+
 import { MockFinanceProvider } from '../../../../mocks/FinanceProvider.mocks';
 import { MarketFacade } from '../../../core/facades/market.facade';
-import { importProvidersFrom } from '@angular/core';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { FINANCE_PROVIDER } from '../../../core/providers/finance.provider';
+import { FinanceService } from '../../../core/services/finance/finance.service';
+
+import { PriceCardWidgetComponent } from './price-card-widget.component';
 
 describe('PriceCardWidgetComponent', () => {
   let component: PriceCardWidgetComponent;
@@ -20,8 +22,8 @@ describe('PriceCardWidgetComponent', () => {
         FinanceService,
         { provide: FINANCE_PROVIDER, useClass: MockFinanceProvider },
         MarketFacade,
-        importProvidersFrom(NgxEchartsModule.forRoot({ echarts: () => import('echarts') })),
-      ],
+        importProvidersFrom(NgxEchartsModule.forRoot({ echarts: () => import('echarts') }))
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PriceCardWidgetComponent);
@@ -36,4 +38,4 @@ describe('PriceCardWidgetComponent', () => {
     const title = fixture.nativeElement.querySelector('h2');
     expect(title.textContent).toContain('AAPL');
   });
-}); 
+});

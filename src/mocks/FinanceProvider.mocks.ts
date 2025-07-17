@@ -1,13 +1,19 @@
 // Mock del proveedor
-import {FinanceProviderInterface} from '../app/shared/models/Interface/finance-provider-interface';
-import {signal, WritableSignal} from '@angular/core';
-import {ExSymbol} from '../app/shared/models/Interface/symbol';
-import {HistoricalData} from '../app/shared/models/Interface/historical-data';
+import { signal, WritableSignal } from '@angular/core';
+
+import { FinanceProviderInterface } from '../app/shared/models/Interface/finance-provider-interface';
+import { HistoricalData } from '../app/shared/models/Interface/historical-data';
+import { ExSymbol } from '../app/shared/models/Interface/symbol';
 
 export class MockFinanceProvider implements FinanceProviderInterface {
-
   getRealTimeData(_symbol: string) {
-    return signal({ symbol: _symbol, price: 150, change: 2, volume: 5000, timestamp: '2024-01-01' });
+    return signal({
+      symbol: _symbol,
+      price: 150,
+      change: 2,
+      volume: 5000,
+      timestamp: '2024-01-01'
+    });
   }
 
   getSymbolList(): WritableSignal<ExSymbol[]> {
@@ -17,7 +23,7 @@ export class MockFinanceProvider implements FinanceProviderInterface {
     ]);
   }
 
-  getDataBySymbol(symbol: string): WritableSignal<HistoricalData> {
+  getDataBySymbol(_symbol: string): WritableSignal<HistoricalData> {
     return signal({
       date: 3600,
       open: 150,

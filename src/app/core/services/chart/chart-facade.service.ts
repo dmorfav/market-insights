@@ -16,7 +16,7 @@ export interface AreaPoint {
   readonly value: number;
 }
 
-export interface LinePoint extends AreaPoint {}
+export type LinePoint = AreaPoint;
 
 export interface StackedAreaSeries {
   readonly name: string;
@@ -43,14 +43,25 @@ export interface BoxplotPoint {
 
 export type ViolinData = ReadonlyArray<number>;
 
-export interface DonutSlice { name: string; value: number; }
+export interface DonutSlice {
+  name: string;
+  value: number;
+}
 
-export interface TreemapNode { name: string; value?: number; children?: TreemapNode[]; }
+export interface TreemapNode {
+  name: string;
+  value?: number;
+  children?: TreemapNode[];
+}
 
-export interface SunburstNode { name: string; value?: number; children?: SunburstNode[]; }
+export interface SunburstNode {
+  name: string;
+  value?: number;
+  children?: SunburstNode[];
+}
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ChartFacadeService {
   /**
@@ -85,12 +96,12 @@ export class ChartFacadeService {
           formatter: (value: string) => {
             const ts = Number(value);
             return Number.isFinite(ts) ? new Date(ts).toLocaleDateString() : value;
-          },
-        },
+          }
+        }
       },
       yAxis: {
         scale: true,
-        splitArea: { show: true },
+        splitArea: { show: true }
       },
       series: [
         {
@@ -103,10 +114,10 @@ export class ChartFacadeService {
             color: '#26a69a',
             color0: '#ef5350',
             borderColor: '#26a69a',
-            borderColor0: '#ef5350',
-          },
-        },
-      ],
+            borderColor0: '#ef5350'
+          }
+        }
+      ]
     };
 
     return option;
@@ -121,7 +132,7 @@ export class ChartFacadeService {
       return {};
     }
 
-    const data: Array<[number, number]> = points.map((p) => [p.time * 1000, p.value]);
+    const data: Array<[number, number]> = points.map(p => [p.time * 1000, p.value]);
 
     const option: EChartsOption = {
       animation: false,
@@ -130,12 +141,12 @@ export class ChartFacadeService {
       tooltip: { trigger: 'axis' },
       xAxis: {
         type: 'time',
-        axisTick: { show: false },
+        axisTick: { show: false }
       },
       yAxis: {
         type: 'value',
         scale: true,
-        splitLine: { show: false },
+        splitLine: { show: false }
       },
       series: [
         {
@@ -144,11 +155,11 @@ export class ChartFacadeService {
           symbol: 'none',
           lineStyle: { width: 1, color: '#42a5f5' },
           areaStyle: {
-            color: 'rgba(66,165,245,0.15)',
+            color: 'rgba(66,165,245,0.15)'
           },
-          data,
-        },
-      ],
+          data
+        }
+      ]
     };
 
     return option;
@@ -159,7 +170,7 @@ export class ChartFacadeService {
       return {};
     }
 
-    const data: Array<[number, number]> = points.map((p) => [p.time * 1000, p.value]);
+    const data: Array<[number, number]> = points.map(p => [p.time * 1000, p.value]);
 
     return {
       animation: false,
@@ -168,12 +179,12 @@ export class ChartFacadeService {
       tooltip: { trigger: 'axis' },
       xAxis: {
         type: 'time',
-        axisTick: { show: false },
+        axisTick: { show: false }
       },
       yAxis: {
         type: 'value',
         scale: true,
-        splitLine: { show: false },
+        splitLine: { show: false }
       },
       series: [
         {
@@ -181,9 +192,9 @@ export class ChartFacadeService {
           smooth: true,
           symbol: 'none',
           lineStyle: { width: 2, color: '#42a5f5' },
-          data,
-        },
-      ],
+          data
+        }
+      ]
     } as EChartsOption;
   }
 
@@ -192,7 +203,7 @@ export class ChartFacadeService {
       return {};
     }
 
-    const timeAxis = series[0].points.map((p) => p.time * 1000);
+    const timeAxis = series[0].points.map(p => p.time * 1000);
 
     return {
       animation: false,
@@ -203,13 +214,13 @@ export class ChartFacadeService {
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: timeAxis,
+        data: timeAxis
       },
       yAxis: {
         type: 'value',
-        scale: true,
+        scale: true
       },
-      series: series.map((s) => ({
+      series: series.map(s => ({
         name: s.name,
         type: 'line',
         stack: 'total',
@@ -218,8 +229,8 @@ export class ChartFacadeService {
         areaStyle: {},
         lineStyle: { width: 1 },
         itemStyle: s.color ? { color: s.color } : undefined,
-        data: s.points.map((p) => p.value),
-      })),
+        data: s.points.map(p => p.value)
+      }))
     } as EChartsOption;
   }
 
@@ -228,7 +239,7 @@ export class ChartFacadeService {
       return {};
     }
 
-    const timeAxis = series[0].points.map((p) => p.time * 1000);
+    const timeAxis = series[0].points.map(p => p.time * 1000);
 
     return {
       animation: false,
@@ -238,24 +249,24 @@ export class ChartFacadeService {
       grid: { left: 0, right: 0, top: 8, bottom: 24, containLabel: true },
       xAxis: {
         type: 'category',
-        data: timeAxis,
+        data: timeAxis
       },
       yAxis: {
         type: 'value',
         inverse: true, // rank 1 at top
         min: 1,
-        max: Math.max(...series.flatMap((s) => s.points.map((p) => p.rank))),
-        splitLine: { show: false },
+        max: Math.max(...series.flatMap(s => s.points.map(p => p.rank))),
+        splitLine: { show: false }
       },
-      series: series.map((s) => ({
+      series: series.map(s => ({
         name: s.name,
         type: 'line',
         symbol: 'circle',
         symbolSize: 6,
         lineStyle: { width: 2 },
         itemStyle: s.color ? { color: s.color } : undefined,
-        data: s.points.map((p) => p.rank),
-      })),
+        data: s.points.map(p => p.rank)
+      }))
     } as EChartsOption;
   }
 
@@ -273,9 +284,9 @@ export class ChartFacadeService {
       series: [
         {
           type: 'boxplot',
-          data,
-        },
-      ],
+          data
+        }
+      ]
     } as EChartsOption;
   }
 
@@ -305,8 +316,8 @@ export class ChartFacadeService {
       yAxis: { type: 'value', scale: true },
       series: [
         { type: 'boxplot', data: boxData },
-        { type: 'scatter', data: scatterData, symbolSize: 4, itemStyle: { opacity: 0.6 } },
-      ],
+        { type: 'scatter', data: scatterData, symbolSize: 4, itemStyle: { opacity: 0.6 } }
+      ]
     } as EChartsOption;
   }
 
@@ -320,9 +331,9 @@ export class ChartFacadeService {
           avoidLabelOverlap: false,
           label: { show: false },
           emphasis: { label: { show: true, fontSize: 16, fontWeight: 'bold' } },
-          data: slices.map(s => ({ ...s })),
-        },
-      ],
+          data: slices.map(s => ({ ...s }))
+        }
+      ]
     } as EChartsOption;
   }
 
@@ -332,11 +343,11 @@ export class ChartFacadeService {
       series: [
         {
           type: 'treemap',
-          data: data as any,
+          data: data as unknown,
           roam: false,
-          nodeClick: false,
-        },
-      ],
+          nodeClick: false
+        }
+      ]
     } as EChartsOption;
   }
 
@@ -346,10 +357,10 @@ export class ChartFacadeService {
       series: [
         {
           type: 'sunburst',
-          data: data as any,
-          radius: [0, '90%'],
-        },
-      ],
+          data: data as unknown,
+          radius: [0, '90%']
+        }
+      ]
     } as EChartsOption;
   }
-} 
+}

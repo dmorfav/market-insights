@@ -1,26 +1,28 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgxEchartsModule } from 'ngx-echarts';
-import type { EChartsOption } from 'echarts';
-import { CandlePoint, ChartFacadeService } from '../../../../core/services/chart/chart-facade.service';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { inject } from '@angular/core';
+import type { EChartsOption } from 'echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
+
+import {
+  CandlePoint,
+  ChartFacadeService
+} from '../../../../core/services/chart/chart-facade.service';
 
 @Component({
   selector: 'app-candle-chart',
-  template: `
-    <div echarts [options]="options()" class="chart-container"></div>
-  `,
+  template: ` <div echarts [options]="options()" class="chart-container"></div> `,
   styles: [
     `
       .chart-container {
         width: 100%;
         height: 400px;
       }
-    `,
+    `
   ],
   standalone: true,
   imports: [CommonModule, NgxEchartsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CandleChartComponent {
   candleData = input.required<readonly CandlePoint[]>();
@@ -30,4 +32,4 @@ export class CandleChartComponent {
   readonly options = computed((): EChartsOption => {
     return this.chartFacade.buildCandleOptions(this.candleData());
   });
-} 
+}

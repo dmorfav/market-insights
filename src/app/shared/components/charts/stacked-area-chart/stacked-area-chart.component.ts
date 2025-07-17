@@ -1,8 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { ChangeDetectionStrategy, Component, computed, input, inject } from '@angular/core';
 import type { EChartsOption } from 'echarts';
-import { ChartFacadeService, StackedAreaSeries } from '../../../../core/services/chart/chart-facade.service';
+import { NgxEchartsModule } from 'ngx-echarts';
+
+import {
+  ChartFacadeService,
+  StackedAreaSeries
+} from '../../../../core/services/chart/chart-facade.service';
 
 @Component({
   selector: 'app-stacked-area-chart',
@@ -13,16 +17,18 @@ import { ChartFacadeService, StackedAreaSeries } from '../../../../core/services
         width: 100%;
         height: 300px;
       }
-    `,
+    `
   ],
   standalone: true,
   imports: [CommonModule, NgxEchartsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StackedAreaChartComponent {
   data = input.required<readonly StackedAreaSeries[]>();
 
   private readonly facade = inject(ChartFacadeService);
 
-  readonly options = computed((): EChartsOption => this.facade.buildStackedAreaOptions(this.data()));
-} 
+  readonly options = computed(
+    (): EChartsOption => this.facade.buildStackedAreaOptions(this.data())
+  );
+}
