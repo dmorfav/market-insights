@@ -7,6 +7,7 @@ import { ExSymbol } from '../app/shared/models/Interface/symbol';
 
 export class MockFinanceProvider implements FinanceProviderInterface {
   getRealTimeData(_symbol: string) {
+    console.log('getRealTimeData', _symbol);
     return signal({
       symbol: _symbol,
       price: 150,
@@ -24,6 +25,7 @@ export class MockFinanceProvider implements FinanceProviderInterface {
   }
 
   getDataBySymbol(_symbol: string): WritableSignal<HistoricalData> {
+    console.log('getDataBySymbol', _symbol);
     return signal({
       date: 3600,
       open: 150,

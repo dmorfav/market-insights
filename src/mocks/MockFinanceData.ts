@@ -65,6 +65,7 @@ export class MockFinanceData {
   }
 
   static createDataBySymbol(_symbol: string): HistoricalData {
+    console.log('createDataBySymbol', _symbol);
     return {
       date: new Date().getTime(),
       open: this.getRandomIntInRange(this.PRICE_RANGES.OPEN.min, this.PRICE_RANGES.OPEN.max),
