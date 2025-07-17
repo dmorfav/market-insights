@@ -1,13 +1,8 @@
-# Tradewise – Dashboard de Alto Rendimiento con Angular 20+
+# Tradewise Dashboard
 
-## Índice
-1. [Visión general](#visión-general)
-2. [Instalación](#instalación)
-3. [Scripts npm](#scripts-npm)
-4. [Estructura del proyecto](#estructura-del-proyecto)
-5. [Pruebas y cobertura](#pruebas-y-cobertura)
-6. [Convenciones de desarrollo](#convenciones-de-desarrollo)
-7. [Contribuir](#contribuir)
+[![codecov](https://codecov.io/gh/dmorfav/tradewise/graph/badge.svg?token=QNM9te29rv)](https://codecov.io/gh/dmorfav/tradewise) 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a416c087-64eb-4eb5-aec8-10aaabaed461/deploy-status)](https://app.netlify.com/sites/mymarketinsights/deploys)
+[![Build, Test, and Upload Coverage](https://github.com/dmorfav/tradewise/actions/workflows/build.yml/badge.svg)](https://github.com/dmorfav/tradewise/actions/workflows/build.yml)
 
 ## Visión general
 Tradewise es una aplicación **Angular 20+ standalone** que muestra una serie de **gráficos financieros de alto volumen** basados en _Apache ECharts_.  
