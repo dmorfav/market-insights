@@ -8,7 +8,7 @@
   to = "/index.html"
   status = 200
 
-# Ejemplo: permite optimizar imágenes de dominios externos con NgOptimizedImage + Netlify Image CDN
+# Ejemplo: permite optimizar imágenes de dominios externos con NgOptimizedImage + Netlify Image CDN.
 #[images]
 #  remote_images = [
 #    "https://mi-dominio-de-imagenes.com/.*"
