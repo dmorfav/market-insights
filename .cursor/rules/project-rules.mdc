@@ -1,0 +1,91 @@
+---
+alwaysApply: true
+---
+# 📐 Contracto de Reutilizabilidad — Chart Components
+
+> Estos lineamientos garantizan que **cualquier** componente de gráfica pueda migrarse a un micro-frontend, empaquetarse como librería NPM o incrustarse en proyectos externos sin cambios de código.
+
+| # | Regla                                                                                                                                                           | Beneficio clave |
+|---|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
+| **R-1** | **Autonomía total**: el componente **no** importa servicios de datos (Finnhub, facades, etc.). Solo recibe `@Input()`/`input()` con **datos inmutables** y opcionalmente `config`. | Cambiar la fuente de datos no obliga a tocar el componente. |
+| **R-2** | **Sin efectos secundarios**: no escribe en `localStorage`, no hace `fetch`. Cualquier salida se expone vía `@Output()`/signal (`chartReady`, `pointClick`). | Encapsula side-effects en capas superiores ⇒ SRP cumplido. |
+| **R-3** | **ChangeDetectionStrategy.OnPush + Signals Inputs**. Transformaciones costosas se realizan en `computed()` o *pure pipes*. | Rendimiento óptimo; listo para lazy-loading y host variados. |
+| **R-4** | **Theming desacoplado**: colores obtenidos de CSS vars (`var(--color-primary)`) o `config.palette`. Contenido visual aislado mediante Shadow DOM o estilos scoped. | Permite integrarse en múltiples design systems / temas. |
+| **R-5** | **API estable y versionada**: expone `interface ChartConfig` anotado con `/** @public */`. Nuevos campos solo se añaden (no romper). | Facilita el versionado semántico al publicar en NPM. |
+| **R-6** | **Opciones globales vía InjectionToken** (`@Optional()`), nunca singletons internos. | El host controla localización, formato numérico, etc. |
+| **R-7** | **Dependencias mínimas**: únicamente `echarts` y `@angular/core`. Cualquier helper heavy ≥ 10 kB va como *peerDependency*. | Bundles más pequeños y sin duplicados en MFEs. |
+| **R-8** | **Internacionalización y A11y**: textos y tooltips por `config.i18n`; fallback en inglés. Añadir `role="img"` y descripciones ARIA. | Cumple WCAG & apps multilingües. |
+| **R-9** | **Testing en aislamiento**: cada componente tiene su `.spec.ts` que *mockea* `echarts.init` y realiza snapshots de `EChartsOption` + DOM. | Evita regresiones al mover el componente a otro workspace. |
+| **R-10** | **Empaquetado agnóstico**: reside en `projects/tradewise-charts`, configurado con `ng-packagr`, `sideEffects: false`, tipados incluidos. | Listo para publicarse o consumirse vía Module Federation. |
+| **R-11** | **Responsabilidad única visual**: si un widget necesita varias series (p. ej. velas + volumen) se crea un *widget* contenedor, no se hincha el primitivo. | Mantiene API simple y re-utilizable. |
+| **R-12** | **Documentación viva**: cada componente incluye Storybook stories: default, dark theme, datasets grandes, estado *loading*. | Acelera adopción por otros equipos y asegura ejemplos actualizados. |
+
+**R-13** · **Eventos como `output()` + Signal**  
+Cada componente de gráfica que permita interacción del usuario (click, brush, selección) **debe exponer** un
+```
+selected = output<ChartSelectEvent>();
+```
+donde `ChartSelectEvent` representa el dato crudo emitido por ECharts (o tu propio DTO).  
+Este patrón conserva el aislamiento (el componente sigue sin saber quién lo consume) y evita acoplarte al
+`EventEmitter` clásico; las apps host podrán convertir la señal a `Observable` con `toObservable()` o
+vincularla directamente a otra señal.
+
+---
+
+## 📝 Plantilla mínima de componente
+
+### 📝 Plantilla actualizada
+
+```ts
+@Component({
+  selector: 'tw-line-chart',
+  standalone: true,
+  template: '<div class="echart" #host></div>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.ShadowDom,
+})
+export class LineChartComponent implements AfterRender {
+  /* ▼ inputs como señales --------------------------------------- */
+  data   = input<readonly Point[]>();
+  config = input<ChartConfig>();
+
+  /* ▼ output como señal ----------------------------------------- */
+  readonly selected = output<ChartSelectEvent>();
+
+  private chart!: ECharts;
+
+  afterRender() {
+    effect(() => {
+      const option = buildLineOption(this.data(), this.config());
+      if (this.chart) {
+        this.chart.setOption(option, { notMerge: true });
+      } else {
+        this.chart = echarts.init(this.host.nativeElement, undefined, { useUtc: true });
+        this.chart.setOption(option);
+
+        /* Puentea el click de ECharts → output() */
+        this.chart.on('click', (params) => {
+          this.selected.emit({
+            x: params.value[0],
+            y: params.value[1],
+            raw: params
+          });
+        });
+      }
+    });
+  }
+}
+
+/* DTO para mantener tipado y Clean Code */
+export interface ChartSelectEvent {
+  x: number | string | Date;
+  y: number;
+  raw: unknown;       // params completos del handler por si se necesitan
+}
+```
+
+  ✔️ Checklist antes de “Done”
+	•	OnPush + signals verificados en pruebas.
+	•	Storybook actualizado.
+	•	.spec.ts con snapshot de EChartsOption.
+	•	Cumple R-1 … R-12 sin excepciones.
