@@ -5,6 +5,8 @@ import {FinanceService} from '../../../../core/services/finance/finance.service'
 import {FINANCE_PROVIDER} from '../../../../core/providers/finance.provider';
 import {MockFinanceProvider} from '../../../../../mocks/FinanceProvider.mocks';
 import {provideZonelessChangeDetection} from '@angular/core';
+import { importProvidersFrom } from '@angular/core';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 describe('MainDashboardComponent', () => {
   let component: MainDashboardComponent;
@@ -16,7 +18,8 @@ describe('MainDashboardComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         FinanceService, // Registrar el servicio bajo prueba
-        { provide: FINANCE_PROVIDER, useClass: MockFinanceProvider } // Registrar el mock para el token
+        { provide: FINANCE_PROVIDER, useClass: MockFinanceProvider }, // Registrar el mock para el token
+        importProvidersFrom(NgxEchartsModule.forRoot({ echarts: () => import('echarts') })),
       ]
     })
     .compileComponents();

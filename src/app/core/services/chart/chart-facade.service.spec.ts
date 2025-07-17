@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ChartFacadeService, CandlePoint, AreaPoint } from './chart-facade.service';
+import { ChartFacadeService, CandlePoint, AreaPoint, LinePoint, StackedAreaSeries, BumpSeries, BoxplotPoint } from './chart-facade.service';
 import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ChartFacadeService', () => {
@@ -39,5 +39,51 @@ describe('ChartFacadeService', () => {
     expect(series.type).toBe('line');
     expect(series.areaStyle).toBeDefined();
     expect(series.data.length).toBe(2);
+  });
+
+  it('should create line chart options correctly', () => {
+    const points: LinePoint[] = [
+      { time: 1, value: 5 },
+      { time: 2, value: 7 },
+    ];
+    const opts = service.buildLineOptions(points);
+    const series = (opts.series as any[])[0];
+    expect(series.type).toBe('line');
+    expect(series.data.length).toBe(2);
+  });
+
+  it('should create stacked area options with two series', () => {
+    const seriesInput: StackedAreaSeries[] = [
+      { name: 'A', points: [{ time: 1, value: 2 }, { time: 2, value: 3 }] },
+      { name: 'B', points: [{ time: 1, value: 1 }, { time: 2, value: 4 }] },
+    ];
+    const opts = service.buildStackedAreaOptions(seriesInput);
+    expect((opts.series as any[]).length).toBe(2);
+    expect((opts.series as any[])[0].stack).toBe('total');
+  });
+
+  it('should create bump chart options with inverse yAxis', () => {
+    const seriesInput: BumpSeries[] = [
+      { name: 'A', points: [{ time: 1, rank: 3 }, { time: 2, rank: 2 }] },
+    ];
+    const opts = service.buildBumpOptions(seriesInput);
+    expect((opts.yAxis as any).inverse).toBeTrue();
+    expect((opts.series as any[])[0].data[0]).toBe(3);
+  });
+
+  it('should build boxplot options', () => {
+    const pts: BoxplotPoint[] = [
+      { name: 'A', values: [1, 2, 3, 4, 5] },
+    ];
+    const opt = service.buildBoxplotOptions(pts);
+    expect((opt.series as any[])[0].type).toBe('boxplot');
+  });
+
+  it('should build violin options', () => {
+    const data = [
+      { name: 'A', values: [1, 2, 3, 4, 5] },
+    ];
+    const opt = service.buildViolinOptions(data);
+    expect(Array.isArray(opt.series)).toBeTrue();
   });
 }); 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CandlePoint, AreaPoint } from './chart-facade.service';
+import { CandlePoint, AreaPoint, BoxplotPoint } from './chart-facade.service';
 
 @Injectable({ providedIn: 'root' })
 export class MockChartDataService {
@@ -44,6 +44,56 @@ export class MockChartDataService {
     }
     allocation.push({ name: `Asset ${categories}`, value: this.round(remaining) });
     return allocation;
+  }
+
+  generateBoxplotData(categories = 5): BoxplotPoint[] {
+    const data: BoxplotPoint[] = [];
+    for (let i = 0; i < categories; i++) {
+      const arr = Array.from({ length: 50 }, () => Math.random() * 100).sort((a, b) => a - b);
+      const values: [number, number, number, number, number] = [
+        arr[0],
+        arr[Math.floor(arr.length * 0.25)],
+        arr[Math.floor(arr.length * 0.5)],
+        arr[Math.floor(arr.length * 0.75)],
+        arr[arr.length - 1],
+      ];
+      data.push({ name: `Cat ${i + 1}`, values });
+    }
+    return data;
+  }
+
+  generateViolinData(categories = 5): Array<{ name: string; values: number[] }> {
+    const result: Array<{ name: string; values: number[] }> = [];
+    for (let i = 0; i < categories; i++) {
+      const values = Array.from({ length: 50 }, () => Math.random() * 100);
+      result.push({ name: `Cat ${i + 1}`, values });
+    }
+    return result;
+  }
+
+  generateDonutSlices(categories = 5): Array<{ name: string; value: number }> {
+    const slices = [] as Array<{ name: string; value: number }>;
+    let remaining = 100;
+    for (let i = 0; i < categories - 1; i++) {
+      const val = this.round(Math.random() * remaining);
+      slices.push({ name: `Slice ${i + 1}`, value: val });
+      remaining -= val;
+    }
+    slices.push({ name: `Slice ${categories}`, value: this.round(remaining) });
+    return slices;
+  }
+
+  generateTreeData(depth = 2, breadth = 3): any[] {
+    const makeNode = (level: number): any => {
+      if (level === depth) {
+        return { name: `Leaf`, value: this.round(Math.random() * 100) };
+      }
+      return {
+        name: `Node L${level}`,
+        children: Array.from({ length: breadth }, () => makeNode(level + 1)),
+      };
+    };
+    return [makeNode(0)];
   }
 
   private round(v: number): number {
