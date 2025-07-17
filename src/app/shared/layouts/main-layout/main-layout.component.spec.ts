@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {MainLayoutComponent} from './main-layout.component';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
+import { MainLayoutComponent } from './main-layout.component';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
@@ -10,11 +10,8 @@ describe('MainLayoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MainLayoutComponent],
-      providers: [
-        provideExperimentalZonelessChangeDetection()
-      ]
-    })
-      .compileComponents();
+      providers: [provideZonelessChangeDetection()]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MainLayoutComponent);
     await fixture.whenStable();

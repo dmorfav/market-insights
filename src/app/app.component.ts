@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -12,6 +12,6 @@ export class AppComponent implements OnInit {
   title = 'marketInsights';
   ngOnInit() {
     // Disable right click
-    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    document.addEventListener('contextmenu', e => e.preventDefault());
   }
 }

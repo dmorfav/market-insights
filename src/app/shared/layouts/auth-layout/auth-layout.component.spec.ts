@@ -1,7 +1,7 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthLayoutComponent } from './auth-layout.component';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
 
 describe('AuthLayoutComponent', () => {
   let component: AuthLayoutComponent;
@@ -10,11 +10,8 @@ describe('AuthLayoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AuthLayoutComponent],
-      providers: [
-        provideExperimentalZonelessChangeDetection()
-      ]
-    })
-    .compileComponents();
+      providers: [provideZonelessChangeDetection()]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AuthLayoutComponent);
     await fixture.whenStable();

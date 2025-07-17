@@ -1,11 +1,13 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MenuHeaderComponent } from './menu-header.component';
-import { AuthService } from '../../../core/services/auth/auth.service';
-import { Router } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../../../core/services/auth/auth.service';
+
+import { MenuHeaderComponent } from './menu-header.component';
 
 describe('MenuHeaderComponent', () => {
   let component: MenuHeaderComponent;
@@ -20,7 +22,7 @@ describe('MenuHeaderComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MenuHeaderComponent, MatToolbarModule, MatIconModule, MatButtonModule],
       providers: [
-        provideExperimentalZonelessChangeDetection(),
+        provideZonelessChangeDetection(),
         { provide: AuthService, useValue: mockAuthService },
         { provide: Router, useValue: mockRouter }
       ]

@@ -7,9 +7,16 @@
     "build": "NG_APP_ENV=production ng build",
     "watch": "NG_APP_ENV=development ng build --watch --configuration development",
     "test": "ng test",
-    "test:ci": " ng test --watch=false --browsers=ChromeHeadless --code-coverage"
+    "test:ci": " ng test --watch=false --browsers=ChromeHeadless --code-coverage",
+    "lint": "eslint \"./src/**/*.{ts,html}\" --quiet",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write \"./src/**/*.{ts,js,json,css,scss,html,md}\"",
+    "prepare": "husky install"
   },
   "private": true,
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "dependencies": {
     "@angular/animations": "^20.1.1",
     "@angular/cdk": "^20.1.2",
@@ -21,8 +28,19 @@
     "@angular/platform-browser": "^20.1.1",
     "@angular/platform-browser-dynamic": "^20.1.1",
     "@angular/router": "^20.1.1",
+    "echarts": "^5.6.0",
+    "ngx-echarts": "^20.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
+  },
+  "lint-staged": {
+    "**/*.{ts,html}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "**/*.{scss,css,md,json}": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
     "@angular/build": "^20.1.1",
@@ -37,6 +55,21 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.8.3"
+    "typescript": "~5.8.3",
+    "@angular-eslint/builder": "^20.1.1",
+    "@angular-eslint/eslint-plugin": "^20.1.1",
+    "@angular-eslint/eslint-plugin-template": "^20.1.1",
+    "@angular-eslint/template-parser": "^20.1.1",
+    "@typescript-eslint/eslint-plugin": "^8.37.0",
+    "@typescript-eslint/parser": "^8.37.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jasmine": "^4.2.2",
+    "eslint-plugin-jsdoc": "^51.4.1",
+    "eslint-plugin-prettier": "^5.5.1",
+    "prettier": "^3.6.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2"
   }
 }

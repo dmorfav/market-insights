@@ -1,0 +1,15 @@
+[build]
+  command = "npm run build"
+  publish = "dist/tradewise/browser"
+
+# Redirección SPA para que todas las rutas carguen index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Ejemplo: permite optimizar imágenes de dominios externos con NgOptimizedImage + Netlify Image CDN
+#[images]
+#  remote_images = [
+#    "https://mi-dominio-de-imagenes.com/.*"
+#  ] 

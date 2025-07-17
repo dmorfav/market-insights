@@ -6,7 +6,7 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 export class AuthService {
   private readonly mockUsers = [
     { email: 'admin@example.com', password: 'admin123' },
-    { email: 'user@example.com', password: 'user123' },
+    { email: 'user@example.com', password: 'user123' }
   ];
 
   private readonly loginStatus = signal(false);
@@ -29,6 +29,7 @@ export class AuthService {
     } catch (error) {
       this.loginStatus.set(false);
       this.errorMessage.set('Ocurrió un error durante la autenticación');
+      console.error(error);
       return signal(false);
     }
   }

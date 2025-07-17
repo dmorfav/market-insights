@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
   styleUrl: './symbol-card-sk.component.scss',
   standalone: true
 })
-export class SymbolCardSKComponent {
-
-}
+export class SymbolCardSKComponent {}

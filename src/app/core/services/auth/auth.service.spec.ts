@@ -1,13 +1,14 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+
 import { AuthService } from './auth.service';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
 
 describe('AuthService', () => {
   let service: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthService, provideExperimentalZonelessChangeDetection()],
+      providers: [AuthService, provideZonelessChangeDetection()]
     });
     service = TestBed.inject(AuthService);
     localStorage.clear();

@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
   styleUrl: './register.component.scss',
   standalone: true
 })
-export class RegisterComponent {
-
-}
+export class RegisterComponent {}

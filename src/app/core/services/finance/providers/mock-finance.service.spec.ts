@@ -1,13 +1,14 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+
 import { MockFinanceService } from './mock-finance.service';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
 
 describe('MockFinanceService', () => {
   let service: MockFinanceService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideExperimentalZonelessChangeDetection()]
+      providers: [provideZonelessChangeDetection()]
     });
     service = TestBed.inject(MockFinanceService);
   });
@@ -60,8 +61,6 @@ describe('MockFinanceService', () => {
       expect(data().close).toBeLessThanOrEqual(200);
       expect(data().volume).toBeGreaterThanOrEqual(1000);
       expect(data().volume).toBeLessThanOrEqual(10000);
-
-
     });
   });
 });

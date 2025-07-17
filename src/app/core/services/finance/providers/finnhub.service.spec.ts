@@ -1,9 +1,11 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { FinnhubService } from './finnhub.service';
 import { provideHttpClient } from '@angular/common/http';
-import {environment} from '../../../../../environments/environment';
-import {provideExperimentalZonelessChangeDetection} from '@angular/core';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+
+import { environment } from '../../../../../environments/environment';
+
+import { FinnhubService } from './finnhub.service';
 
 describe('FinnhubService', () => {
   let service: FinnhubService;
@@ -12,10 +14,11 @@ describe('FinnhubService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        provideExperimentalZonelessChangeDetection(),
+        provideZonelessChangeDetection(),
         FinnhubService,
         provideHttpClient(),
-        provideHttpClientTesting()],
+        provideHttpClientTesting()
+      ]
     });
     service = TestBed.inject(FinnhubService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -31,12 +34,12 @@ describe('FinnhubService', () => {
       o: [100, 101],
       h: [105, 106],
       l: [95, 96],
-      c: [100, 102],
+      c: [100, 102]
     };
 
     const symbol = 'AAPL';
 
-    const data = service.getDataBySymbol(symbol)
+    const data = service.getDataBySymbol(symbol);
 
     const req = httpMock.expectOne(
       `${environment.FINNHUB_API_URL}/quote?symbol=${symbol}&token=${environment.FINNHUB_API_KEY}`
@@ -44,7 +47,6 @@ describe('FinnhubService', () => {
 
     req.flush(mockResponse);
     expect(req.request.method).toBe('GET');
-
   });
 
   it('should fetch real-time data', () => {
@@ -53,7 +55,7 @@ describe('FinnhubService', () => {
       d: 2,
       dp: 1.5,
       t: 1609459200,
-      v: 5000,
+      v: 5000
     };
 
     const symbol = 'AAPL';
@@ -71,24 +73,23 @@ describe('FinnhubService', () => {
       price: 150,
       change: 2,
       volume: 5000,
-      timestamp: '2021-01-01T00:00:00.000Z',
+      timestamp: '2021-01-01T00:00:00.000Z'
     });
   });
 
   it('should fetch symbol list', () => {
-
     const mockResponse = [
       {
         description: 'Apple Inc.',
         displaySymbol: 'AAPL',
         symbol: 'AAPL',
-        type: 'Common Stock',
+        type: 'Common Stock'
       },
       {
         description: 'Microsoft Corporation',
         displaySymbol: 'MSFT',
         symbol: 'MSFT',
-        type: 'Common Stock',
+        type: 'Common Stock'
       }
     ];
     const data = service.getSymbolList();
@@ -103,12 +104,12 @@ describe('FinnhubService', () => {
     expect(data()[0]).toEqual({
       description: 'Apple Inc.',
       displaySymbol: 'AAPL',
-      symbol: 'AAPL',
+      symbol: 'AAPL'
     });
     expect(data()[1]).toEqual({
       description: 'Microsoft Corporation',
       displaySymbol: 'MSFT',
-      symbol: 'MSFT',
+      symbol: 'MSFT'
     });
   });
 });

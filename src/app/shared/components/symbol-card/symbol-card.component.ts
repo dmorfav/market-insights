@@ -1,11 +1,16 @@
-import {Component, input, output} from '@angular/core';
-import {ExSymbol} from '../../models/Interface/symbol';
+import { Component, input, output } from '@angular/core';
+
+import { ExSymbol } from '../../models/Interface/symbol';
 
 @Component({
   selector: 'app-symbol-card',
   imports: [],
   template: `
-    <div class="symbol-card-common symbol-card" [class.favorite]="isFavorite()" (click)="onToggleFavorite()">
+    <div
+      class="symbol-card-common symbol-card"
+      [class.favorite]="isFavorite()"
+      (click)="onToggleFavorite()"
+    >
       <h3 class="symbol-name">{{ symbol().displaySymbol }}</h3>
       <small class="symbol-small">{{ symbol().description }}</small>
     </div>
@@ -21,5 +26,4 @@ export class SymbolCardComponent {
   onToggleFavorite(): void {
     this.toggleFavorite.emit();
   }
-
 }
